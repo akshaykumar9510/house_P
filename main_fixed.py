@@ -29,18 +29,17 @@ try:
             print(f"Model loaded successfully, type: {type(model)}")
         except Exception as e:
             print(f"Error loading model: {str(e)}")
-            print(traceback.format_exc())
-            # Create a simple model for testing
+            print(traceback.format_exc())            # Create a simple model for testing
             from sklearn.linear_model import LinearRegression
             model = LinearRegression()
-            model.fit([[0, 0, 0, 0, 0, 0, 0, 0]], [0])
+            model.fit([[0, 0, 0, 0, 0]], [0])
             print("Created a simple model for testing")
     else:
         print("Model file not found, creating a simple test model")
         # Create a simple model for testing
         from sklearn.linear_model import LinearRegression
         model = LinearRegression()
-        model.fit([[0, 0, 0, 0, 0, 0, 0, 0]], [0])
+        model.fit([[0, 0, 0, 0, 0]], [0])
         print("Created a simple model for testing")
 except Exception as e:
     print(f"Critical error in model loading: {str(e)}")
@@ -77,18 +76,13 @@ try:
         print("Static files mounted successfully")
     except Exception as e:
         print(f"Error mounting static files: {str(e)}")
-        print(traceback.format_exc())
-
-    # Input model using Pydantic
+        print(traceback.format_exc())    # Input model using Pydantic
     class HouseFeatures(BaseModel):
         MedInc: float
         HouseAge: float
         AveRooms: float
         AveBedrms: float
         Population: float
-        AveOccup: float
-        Latitude: float
-        Longitude: float
 
     @app.get("/", response_class=HTMLResponse)
     async def read_root():
@@ -111,9 +105,7 @@ try:
     @app.get("/health")
     def health_check():
         """Health check endpoint to verify the API is running"""
-        return {"status": "healthy", "model_type": str(type(model))}
-
-    @app.post("/predict")
+        return {"status": "healthy", "model_type": str(type(model))}    @app.post("/predict")
     def predict_price(features: HouseFeatures):
         try:
             # Convert input to 2D array
@@ -122,10 +114,7 @@ try:
                 features.HouseAge, 
                 features.AveRooms,
                 features.AveBedrms, 
-                features.Population,
-                features.AveOccup, 
-                features.Latitude, 
-                features.Longitude
+                features.Population
             ]])
             
             # Predict

@@ -59,9 +59,6 @@ class HouseFeatures(BaseModel):
     AveRooms: float
     AveBedrms: float
     Population: float
-    AveOccup: float
-    Latitude: float
-    Longitude: float
 
 @app.get("/")
 async def read_root():
@@ -79,8 +76,7 @@ async def read_root():
 def predict_price(features: HouseFeatures):
     # Convert input to 2D array
     input_data = np.array([[features.MedInc, features.HouseAge, features.AveRooms,
-                            features.AveBedrms, features.Population,
-                            features.AveOccup, features.Latitude, features.Longitude]])
+                            features.AveBedrms, features.Population]])
     
     # Predict
     prediction = model.predict(input_data)

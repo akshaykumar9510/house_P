@@ -7,6 +7,8 @@ import pandas as pd
 # Load dataset
 data = fetch_california_housing()
 X = pd.DataFrame(data.data, columns=data.feature_names)
+# Only select the first 5 features (MedInc, HouseAge, AveRooms, AveBedrms, Population)
+X = X.iloc[:, :5]
 y = data.target
 
 # Split data
