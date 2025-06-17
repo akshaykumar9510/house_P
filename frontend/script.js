@@ -8,8 +8,7 @@ document.getElementById("predictForm").addEventListener("submit", async function
   Object.keys(data).forEach(key => {
     data[key] = parseFloat(data[key]);
   });
-
-  const response = await fetch("https://your-api-url.onrender.com/predict", {
+  const response = await fetch("/predict", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

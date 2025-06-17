@@ -4,3 +4,8 @@ scikit-learn
 joblib
 numpy
 pandas
+mlflow
+pydantic
+jinja2
+python-multipart
+aiofiles
